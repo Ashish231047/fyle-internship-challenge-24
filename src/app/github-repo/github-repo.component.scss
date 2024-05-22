@@ -1,0 +1,45 @@
+// Import Tailwind CSS utilities
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+// Custom styles for GitHub Repo component
+.container {
+  @apply mx-auto py-8;
+}
+
+.input-container {
+  @apply flex items-center mb-4;
+}
+
+.input-container input {
+  @apply w-2/3 py-2 px-4 border border-gray-300 rounded-l focus:outline-none focus:border-blue-500;
+}
+
+.input-container button {
+  @apply py-2 px-4 bg-blue-500 text-white rounded-r hover:bg-blue-600 focus:outline-none;
+}
+
+.error-message {
+  @apply text-red-500 mb-4;
+}
+
+.empty-state-message {
+  @apply text-gray-500 mb-4;
+}
+
+.loader {
+  @apply text-gray-500 mb-4;
+}
+
+.repo-list {
+  @apply space-y-4;
+}
+
+.repo-item {
+  @apply border border-gray-300 p-4 rounded-lg;
+}
+
+.topic {
+  @apply bg-gray-200 text-gray-600 text-sm px-2 py-1 rounded-md mr-2;
+}

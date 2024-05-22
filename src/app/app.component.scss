@@ -1,0 +1,17 @@
+// Import Tailwind CSS utilities
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+// Custom styles for App component
+.container {
+  @apply mx-auto py-8;
+}
+
+.header {
+  @apply text-4xl font-bold text-center mb-8;
+}
+
+.github-repo-container {
+  @apply mx-auto mt-8;
+}

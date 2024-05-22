@@ -1,0 +1,44 @@
+<div class="container mx-auto py-8">
+  <!-- Search input and button -->
+  <h2 class="text-2xl font-bold mb-4">GitHub Repositories Viewer</h2>
+  <div class="flex items-center mb-4">
+    <input [(ngModel)]="username" type="text" placeholder="Enter GitHub Username"
+           class="w-2/3 py-2 px-4 border border-gray-300 rounded-l focus:outline-none focus:border-blue-500">
+    <button (click)="searchRepos()" class="py-2 px-4 bg-blue-500 text-white rounded-r hover:bg-blue-600 focus:outline-none">Search</button>
+  </div>
+
+  <!-- Error messages -->
+  <div *ngIf="userNotFound && !errorMessage" class="text-gray-500 mb-4">No repositories found for user "{{ username }}".</div>
+  <div *ngIf="errorMessage" class="text-red-500 mb-4">{{ errorMessage }}</div>
+
+  <!-- Skeleton loader -->
+  <div *ngIf="loading; else contentSkeleton">
+    <div class="animate-pulse bg-gray-200 h-10 w-full rounded mb-2"></div>
+    <div class="animate-pulse bg-gray-200 h-10 w-3/4 rounded mb-2"></div>
+    <div class="animate-pulse bg-gray-200 h-10 w-1/2 rounded mb-2"></div>
+  </div>
+
+  <!-- Actual content -->
+  <ng-template #contentSkeleton>
+    <div *ngIf="repos.length">
+      <h2 class="text-2xl font-bold mb-4">Repositories for {{ username }}</h2>
+      <ul class="space-y-4">
+        <li *ngFor="let repo of repos" class="border border-gray-300 p-4 rounded-lg">
+          <a [href]="repo.html_url" target="_blank" class="text-blue-500 font-bold">{{ repo.name }}</a>
+          <div *ngIf="repo.topics && repo.topics.length" class="mt-2">
+            <span *ngFor="let topic of repo.topics" class="bg-gray-200 text-gray-600 text-sm px-2 py-1 rounded-md mr-2">{{ topic }}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </ng-template>
+
+  <!-- Pagination controls -->
+  <div class="flex justify-end mt-4">
+    <select [(ngModel)]="pageSize" (change)="fetchRepositories()" class="px-2 py-1 border border-gray-300 rounded">
+      <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+    </select>
+    <button (click)="prevPage()" [disabled]="currentPage === 1" class="px-4 py-2 ml-2 bg-gray-300 rounded">Previous</button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="px-4 py-2 ml-2 bg-gray-300 rounded">Next</button>
+  </div>
+</div>
